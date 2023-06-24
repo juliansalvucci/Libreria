@@ -1,6 +1,5 @@
-/*
 import { Op } from "sequelize";
-import { User } from "../models";
+import User from "../models/User";
 
 const createUser = async (user) => {
   try {
@@ -58,5 +57,4 @@ const validateUser = async (options) => {
 };
 
 
-export default { createUser, getUser, validateUser };
-*/
+export default { createUser, getUser, getUserByCriteria ,validateUser };
