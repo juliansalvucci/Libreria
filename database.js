@@ -3,9 +3,9 @@ import { Sequelize } from 'sequelize';
 
 // Create a new instance of Sequelize and configure it with your database credentials
 const sequelize = new Sequelize('database_name', 'username', 'password', {
-  host: 'localhost',
+  host: '0.0.0.0',
   dialect: 'sqlite',
-  storage: 'path_to_database_file.sqlite', // Replace with the path to your SQLite database file
+  storage: 'file:///C:/Users/jlssa/Desktop/TP-NODE/database.sqlite', // Replace with the path to your SQLite database file
 });
 
 const _sequelize = sequelize;
