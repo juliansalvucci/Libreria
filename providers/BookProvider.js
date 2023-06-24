@@ -30,6 +30,23 @@ const getAllBooks = async () => {
     }
 };
 
+const updateBook = async (book) => {
+    try {
+        const [updatedRowsCount] = await Book.update(book, {
+            where: { id: book.id }
+        });
+
+        const response = updatedRowsCount === 0
+            ? { status: 404, message: 'Book not found.' }
+            : { status: 200, message: 'Operation successful.' };
+
+        return response;
+    } catch (err) {
+        console.error("Error when fetching", err);
+        throw err;
+    }
+};
+
 const inactiveBook = async (bookId) => {
     try {
         const updatedRowsCount = await Book.update(
@@ -51,4 +68,4 @@ const inactiveBook = async (bookId) => {
 
 
 
-export default { createBook, getBook, getAllBooks, inactiveBook };
+export default { createBook, getBook, getAllBooks, updateBook, inactiveBook };

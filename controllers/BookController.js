@@ -1,83 +1,56 @@
-import Book from "../models/Book.js";
+import BookService from "../services/BookService";
 
-const crear = async (req, res) => {
+const createBook = async (req, res) => {
     try {
-        // Obtener los datos del nuevo libro del cuerpo de la solicitud
-        const { isbn, title, author, year, libraryId } = req.body;
-
-        // Crear el libro en la base de datos utilizando el modelo Book de Sequelize
-        const book = await Book.create({ isbn, title, author, year, libraryId });
-
-        res.status(201).json(book);
+        const book = await BookService.create(req.body);
+        res.status(200).json(book);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Ha ocurrido un error al crear el libro.' });
+        res.status(500).json({ message: 'Error when fetching.' });
     }
 };
 
-const consultar = async (req, res) => {
+const getBook = async (req, res) => {
     try {
-        // Obtener todos los libros de la base de datos utilizando el modelo Book de Sequelize
-        const books = await Book.findAll();
+        const { id } = req.params;
+        const book = await BookService.getBook(id);
+        return book;
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error when fetching.' });
+    }
+};
 
+const getAllBooks = async (req, res) => {
+    try {
+        const books = await BookService.getAllBooks();
         res.json(books);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Ha ocurrido un error al consultar los libros.' });
+        res.status(500).json({ message: 'Error when fetching.' });
     }
 };
 
-const actualizar = async (req, res) => {
+const updateBook = async (res, req) => {
     try {
-        // Obtener el ID del libro a actualizar y los nuevos datos del cuerpo de la solicitud
+        const book = await BookService.updateBook(req);
+        return book
+    } catch (err) {
+        console.error(error);
+        res.status(500).json({ message: 'Error when fetching.' });
+    }
+}
+
+const inactiveBook = async (req, res) => {
+    try {
         const { id } = req.params;
-        const { isbn, title, author, year, libraryId } = req.body;
-
-        // Buscar el libro en la base de datos utilizando el ID y actualizar sus datos
-        const [updatedRowsCount, updatedRows] = await Book.update(
-            { isbn, title, author, year, libraryId },
-            { where: { id }, returning: true }
-        );
-
-        if (updatedRowsCount === 0) {
-            return res.status(404).json({ message: 'No se encontró el libro.' });
-        }
-
-        res.json(updatedRows[0]);
+        const response = await BookService.inactiveBook(id);
+        return response;
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Ha ocurrido un error al actualizar el libro.' });
-    }
-};
-
-const eliminar = async (req, res) => {
-    try {
-        // Obtener el ID del libro a dar de baja
-        const { id } = req.params;
-
-        // Buscar el libro en la base de datos utilizando el ID y actualizar su estado a inactivo
-        const updatedRowsCount = await Book.update(
-            { active: false },
-            { where: { id } }
-        );
-
-        if (updatedRowsCount[0] === 0) {
-            return res.status(404).json({ message: 'No se encontró el libro.' });
-        }
-
-        res.sendStatus(204);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Ha ocurrido un error al dar de baja el libro.' });
+        res.status(500).json({ message: 'Error when fetching.' });
     }
 };
 
 
-const _crear = crear;
-export { _crear as crear };
-const _consultar = consultar;
-export { _consultar as consultar };
-const _actualizar = actualizar;
-export { _actualizar as actualizar };
-const _eliminar = eliminar;
-export { _eliminar as eliminar };
+export default { createBook, getBook, getAllBooks, updateBook, inactiveBook };

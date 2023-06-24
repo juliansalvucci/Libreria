@@ -30,6 +30,23 @@ const getAllLibrarys = async () => {
     }
 };
 
+const updateLibrary = async (library) => {
+    try {
+        const [updatedRowsCount] = await Library.update(library, {
+            where: { id: library.id }
+        });
+
+        const response = updatedRowsCount === 0
+            ? { status: 404, message: 'Library not found.' }
+            : { status: 200, message: 'Operation successful.' };
+
+        return response;
+    } catch (err) {
+        console.error("Error when fetching", err);
+        throw err;
+    }
+};
+
 const inactiveLibrary = async (libraryId) => {
     try {
         const updatedRowsCount = await Library.update(
@@ -51,4 +68,4 @@ const inactiveLibrary = async (libraryId) => {
 
 
 
-export default { createLibrary, getLibrary, getAllLibrarys, inactiveLibrary };
+export default { createLibrary, getLibrary, getAllLibrarys, updateLibrary ,inactiveLibrary };

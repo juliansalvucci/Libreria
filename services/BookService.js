@@ -14,9 +14,15 @@ const getAllBooks = async() => {
     return books
 };
 
+const updateBook = async(book) => {
+    const response = await BookProvider.updateBook(book)
+    return response;
+}
+
 const inactiveBook = async(bookId) => {
-    await BookProvider.inactiveBook(bookId);
+    const response = await BookProvider.inactiveBook(bookId);
+    return response;
 }
 
 
-export default { createBook, getBook, getAllBooks, inactiveBook  };
+export default { createBook, getBook, getAllBooks, updateBook, inactiveBook  };
