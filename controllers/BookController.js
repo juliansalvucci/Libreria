@@ -21,13 +21,13 @@ const getBook = async (req, res) => {
     }
 };
 
-const getAllBooks = async (req, res) => {
+const getAllBooks = async () => {
     try {
         const books = await BookService.getAllBooks();
-        res.json(books);
+        return books;
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Error when fetching.' });
+        throw new Error('Error when fetching.');
     }
 };
 

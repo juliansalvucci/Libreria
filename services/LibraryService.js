@@ -14,9 +14,14 @@ const getAllLibrarys = async () => {
     return librarys
 };
 
+const updateBook = async(library) => {
+    const response = await LibraryProvider.updateLibrary(library)
+    return response;
+}
+
 const inactiveLibrary = async (libraryId) => {
     await LibraryProvider.inactiveLibrary(libraryId);
 }
 
 
-export default { createLibrary, getLibrary, getAllLibrarys, inactiveLibrary };
+export default { createLibrary, getLibrary, getAllLibrarys, updateLibrary, inactiveLibrary };
