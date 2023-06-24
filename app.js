@@ -5,6 +5,7 @@ import passport from 'passport';
 import authRoutes from './routes/AuthRoutes.js';
 import libraryRoutes from './routes/LibraryRoutes.js';
 import bookRoutes from './routes/BookRoutes.js';
+import { sequelize } from './database.js';
 // Importa otros módulos y configuraciones necesarios
 
 const app = express();
@@ -33,6 +34,14 @@ app.use('/libraries', libraryRoutes);
 app.use('/books', bookRoutes);
 // Configura otras rutas
 
+sequelize
+  .sync({ force: false }) // Utiliza { force: true } si deseas recrear las tablas en cada reinicio de la aplicación
+  .then(() => {
+    console.log('Migración de modelos completada');
+  })
+  .catch((error) => {
+    console.error('Error en la migración de modelos:', error);
+  });
 // Inicia el servidor
 app.listen(3000, () => {
   console.log('Servidor iniciado en el puerto 3000');
