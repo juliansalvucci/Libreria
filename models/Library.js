@@ -1,7 +1,7 @@
-import { INTEGER, STRING } from 'sequelize';
-import { define } from '../database';
+import { INTEGER, STRING, BOOLEAN } from 'sequelize';
+import {sequelize} from '../database.js';
 
-const Library = define('library', {
+const Library = sequelize.define('library', {
   id: {
     type: INTEGER,
     primaryKey: true,
@@ -17,6 +17,10 @@ const Library = define('library', {
   },
   telefono: {
     type: STRING,
+    allowNull: false
+  },
+  active: {
+    type: BOOLEAN,
     allowNull: false
   }
 });

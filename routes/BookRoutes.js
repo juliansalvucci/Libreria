@@ -1,10 +1,11 @@
 import { Router } from 'express';
 const bookRoutes = Router();
-import { login, register, logout } from '../controllers/BookController.js';
+import { crear, consultar, actualizar, eliminar } from '../controllers/BookController.js';
 
-bookRoutes.post('/login', login);
-bookRoutes.post('/register', register);
-bookRoutes.get('/logout', logout);
+bookRoutes.post('/crear', crear);
+bookRoutes.post('/consultar', consultar);
+bookRoutes.get('/actualizar', actualizar);
+bookRoutes.get('/eliminar', eliminar);
 // Define otras rutas
 
 export default bookRoutes;

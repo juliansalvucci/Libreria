@@ -1,8 +1,8 @@
-import { INTEGER, STRING } from 'sequelize';
-import { define } from '../database';
-import Library from './Library';
+import { BOOLEAN, INTEGER, STRING } from 'sequelize';
+import { sequelize } from '../database.js';
+import Library from './Library.js';
 
-const Book = define('book', {
+const Book = sequelize.define('book', {
   id: {
     type: INTEGER,
     primaryKey: true,
@@ -24,9 +24,13 @@ const Book = define('book', {
   year: {
     type: STRING,
     allowNull: false
+  },
+  active: {
+    type: BOOLEAN,
+    allowNull: false
   }
 });
 
-Book.belongsTo(Library, { foreignKey: 'library' });
+Book.belongsTo(Library, { foreignKey: 'libraryId', as: 'libraryAssociation' });
 
 export default Book;
