@@ -24,7 +24,7 @@ const inactiveBook = async(bookId) => {
     return response;
 }
 
-const BookService = () => {
+const BookService = {
   createBook,
   getBook,
   getAllBooks,

@@ -65,7 +65,7 @@ const inactiveBook = async (bookId) => {
     }
 }
 
-const BookProvider = () => {
+const BookProvider =  {
     createBook,
     getBook,
     getAllBooks,
