@@ -1,4 +1,4 @@
-import BookProvider from "../providers/BookProvider";
+import BookProvider from "../providers/BookProvider.js";
 
 const createBook = async (book) => {
   return await BookProvider.createBook(book);
@@ -24,5 +24,25 @@ const inactiveBook = async(bookId) => {
     return response;
 }
 
+const BookService = () => {
+  createBook,
+  getBook,
+  getAllBooks,
+  updateBook,
+  inactiveBook
+}
 
-export default { createBook, getBook, getAllBooks, updateBook, inactiveBook  };
+export default {BookService};
+
+/*
+const _createBook = createBook;
+export { _createBook as createBook };
+const _getBook = getBook;
+export { _getBook as getBook };
+const  _getAllBooks = getAllBooks;
+export { _getAllBooks as getAllBooks };
+const _updateBook = updateBook;
+export { _updateBook as updateBook };
+const _inactiveBook = inactiveBook;
+export { _inactiveBook as inactiveBook };
+*/

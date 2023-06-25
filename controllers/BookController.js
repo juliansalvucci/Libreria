@@ -1,4 +1,4 @@
-import BookService from "../services/BookService";
+import BookService from "../services/BookService.js";
 
 const createBook = async (req, res) => {
     try {
@@ -52,5 +52,13 @@ const inactiveBook = async (req, res) => {
     }
 };
 
-
-export default { createBook, getBook, getAllBooks, updateBook, inactiveBook };
+const _createBook = createBook;
+export { _createBook as createBook };
+const _getBook = getBook;
+export { _getBook as getBook };
+const  _getAllBooks = getAllBooks;
+export { _getAllBooks as getAllBooks };
+const _updateBook = updateBook;
+export { _updateBook as updateBook };
+const _inactiveBook = inactiveBook;
+export { _inactiveBook as inactiveBook };

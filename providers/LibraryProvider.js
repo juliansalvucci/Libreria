@@ -1,4 +1,4 @@
-import Library from "../models/Library";
+import Library from "../models/Library.js";
 
 const createLibrary = async (library) => {
     try {
@@ -65,7 +65,26 @@ const inactiveLibrary = async (libraryId) => {
     }
 }
 
+const LibraryProvider = {
+    createLibrary,
+    getLibrary,
+    getAllLibrarys,
+    updateLibrary,
+    inactiveLibrary
+}
+
+export default {LibraryProvider};
 
 
-
-export default { createLibrary, getLibrary, getAllLibrarys, updateLibrary ,inactiveLibrary };
+/*
+const _createLibrary = createLibrary;
+export { _createLibrary as createLibrary };
+const _getLibrary = getLibrary;
+export { _getLibrary as getLibrary };
+const  _getAllLibrarys = getAllLibrarys;
+export { _getAllLibrarys as getAllLibrarys };
+const _updateLibrary = updateLibrary;
+export { _updateLibrary as updateLibrary };
+const _inactiveLibrary = inactiveLibrary;
+export { _inactiveLibrary as inactiveLibrary };
+*/

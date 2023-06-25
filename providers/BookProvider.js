@@ -1,4 +1,4 @@
-import Book from "../models/Book";
+import Book from "../models/Book.js";
 
 const createBook = async (book) => {
     try {
@@ -65,7 +65,24 @@ const inactiveBook = async (bookId) => {
     }
 }
 
+const BookProvider = () => {
+    createBook,
+    getBook,
+    getAllBooks,
+    updateBook,
+    inactiveBook
+}
 
-
-
-export default { createBook, getBook, getAllBooks, updateBook, inactiveBook };
+export default {BookProvider};
+/*
+const _createBook = createBook;
+export { _createBook as createBook };
+const _getBook = getBook;
+export { _getBook as getBook };
+const  _getAllBooks = getAllBooks;
+export { _getAllBooks as getAllBooks };
+const _updateBook = updateBook;
+export { _updateBook as updateBook };
+const _inactiveBook = inactiveBook;
+export { _inactiveBook as inactiveBook };
+*/
