@@ -1,7 +1,7 @@
 const SERVER_SECRET = "SecretoQueSoloConoceElServer";
 
-const passport = require("passport");
-const passportJwt = require("passport-jwt");
+import passport  from "passport";
+import passportJwt from "passport-jwt";
 const JWTStrategy = passportJwt.Strategy;
 const ExtractJWT = passportJwt.ExtractJwt;
 
@@ -36,10 +36,7 @@ const userIsAdminMDW = (req, res, next) => {
   })(req, res, next);
 };
 
-const AuthMW = {
-  jwtValidMDW, 
-  userIsAdminMDW, 
-  SERVER_SECRET
-}
-
-export default {AuthMW}
+const _jwtValidMDW = jwtValidMDW;
+export { _jwtValidMDW as jwtValidMDW };
+const _userIsAdminMDW = userIsAdminMDW;
+export { _userIsAdminMDW as userIsAdminMDW };
